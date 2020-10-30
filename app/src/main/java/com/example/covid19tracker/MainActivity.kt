@@ -16,6 +16,6 @@ class MainActivity : AppCompatActivity() {
         Log.i("Activity1", "Successful")
         Handler(Looper.getMainLooper()).postDelayed({
             startActivity(intent)
-        }, 0)
+        }, 3000)
     }
 }
