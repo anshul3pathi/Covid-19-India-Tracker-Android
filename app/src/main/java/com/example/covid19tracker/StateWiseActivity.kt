@@ -1,13 +1,18 @@
 package com.example.covid19tracker
 
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
+import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import kotlinx.android.synthetic.main.activity_state_wise.*
 import java.lang.Exception
+import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -15,44 +20,45 @@ import kotlin.collections.ArrayList
 class StateWiseActivity : AppCompatActivity() {
 
     private val stateNamesToCode: Map<String, String> = mapOf(
-        "Andaman and Nicobar Islands" to "AN", "Andhra Pradsh" to "AP", "Arunachal Pradesh" to "AR",
-        "Assam" to "AS", "Bihar" to "BR", "Chandigarh" to "CH", "Chattisgarh" to "CT", "Delhi" to "DL",
-        "Dadra and Nagar Haveli" to "DN", "Goa" to "GA", "Gujrat" to "GJ", "Himachal Pradesh" to "HP",
-        "Haryana" to "HR", "Jharkhand" to "JH", "Jammu and Kashmir" to "JK", "Karnataka" to "KA",
-        "Kerala" to "KL", "Ladakh" to "LA", "Maharashtra" to "MH", "Meghalaya" to "ML", "Manipur"
-                to "MN", "Madhya Pradesh" to "MP", "Mizoram" to "MZ", "Nagaland" to "NL", "Orissa" to "OR",
-        "Punjab" to "PB", "Pudducherry" to "PY", "Rajasthan" to "RJ", "Sikkim" to "SK", "Telangana"
-                to "TG", "Tamil Nadu" to "TN", "Tripura" to "TR", "India" to "TT", "Uttar Pradesh" to "UP",
+        "Andaman and Nicobar Islands" to "AN", "Andhra Pradsh" to "AP",
+        "Arunachal Pradesh" to "AR", "Assam" to "AS", "Bihar" to "BR", "Chandigarh" to "CH",
+        "Chattisgarh" to "CT", "Delhi" to "DL", "Dadra and Nagar Haveli" to "DN", "Goa" to "GA",
+        "Gujrat" to "GJ", "Himachal Pradesh" to "HP", "Haryana" to "HR", "Jharkhand" to "JH",
+        "Jammu and Kashmir" to "JK", "Karnataka" to "KA", "Kerala" to "KL", "Ladakh" to "LA",
+        "Maharashtra" to "MH", "Meghalaya" to "ML", "Manipur" to "MN", "Madhya Pradesh" to "MP",
+        "Mizoram" to "MZ", "Nagaland" to "NL", "Orissa" to "OR", "Punjab" to "PB",
+        "Pudducherry" to "PY", "Rajasthan" to "RJ", "Sikkim" to "SK", "Telangana" to "TG",
+        "Tamil Nadu" to "TN", "Tripura" to "TR", "India" to "TT", "Uttar Pradesh" to "UP",
         "Uttarakhand" to "UT", "West Bengal" to "WB"
     )
 
     lateinit var mAdapter: StateWiseListAdapter
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_state_wise)
         Log.i("Third Activity", "Loaded Successfully")
         recyclerView.layoutManager = LinearLayoutManager(this)
         mAdapter = StateWiseListAdapter()
-        fetchData()
+
         recyclerView.adapter = mAdapter
+
+        fetchData(0)
 
     }
 
-    private fun fetchData() {
-        val sdf = SimpleDateFormat("yyyy-MM-dd")
-        val date: String = sdf.format(Date())
-        Log.i("Date", date)
-//        val url = "https://api.covid19india.org/v4/data-$date.json"
-        val url = "https://api.covid19india.org/v4/data-2020-10-28.json"
-//        Log.i("URL", url)
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun fetchData(dayMinus: Long) {
+        val date = IndiaNumbersActivity().getDate(dayMinus)
+        val url = "https://api.covid19india.org/v4/data-$date.json"
         val jSONObjectRequest = JsonObjectRequest(
             Request.Method.GET, url, null,
-            {
+            Response.Listener{ response ->
                 val stateDataList = ArrayList<StateData>()
                 Log.i("API CAll", "Successful")
                 for(item in stateNamesToCode) {
-                    val stateDataJsonObject = it.getJSONObject(item.value)
+                    val stateDataJsonObject = response.getJSONObject(item.value)
                     val total = stateDataJsonObject.getJSONObject("total")
                     val delta = stateDataJsonObject.getJSONObject("delta")
 
@@ -74,7 +80,7 @@ class StateWiseActivity : AppCompatActivity() {
 
                     Log.i("test", confirmed)
 
-                    val state = StateData(
+                    var state = StateData(
                         item.key,
                         confirmed,
                         active,
@@ -85,9 +91,7 @@ class StateWiseActivity : AppCompatActivity() {
                         deltaRecovered,
                         deltaDeceased
                     )
-                    Log.i("Test4", "${state.confirmed} ${state.recovered} ${state.active} ${state.deceased}")
-
-                    Log.i("Test5", "${state.confirmedDelta} ${state.recoveredDelta} ${state.deceasedDelta} ${state.activeDelta}")
+                    state = IndiaNumbersActivity().numberFormatter(state)
 
                     if(item.key == "India") {
                         continue
@@ -96,11 +100,13 @@ class StateWiseActivity : AppCompatActivity() {
                     }
                 }
                 mAdapter.updateCovidData(stateDataList)
+                Toast.makeText(this, "$date", Toast.LENGTH_LONG).show()
+
             },
-            {
-                Log.e("Volley Failed", "API Request Failed")
+            Response.ErrorListener{ error->
+                Log.e("Volley Failed", error.toString())
+                fetchData(dayMinus + 1)
             })
         MySingleton.getInstance(this).addToRequestQueue(jSONObjectRequest)
     }
-
 }

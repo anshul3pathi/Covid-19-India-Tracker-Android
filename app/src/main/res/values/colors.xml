@@ -5,4 +5,8 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="activityBackground">#0B0233</color>
     <color name="textOnDarkBackground">#F5F6F6</color>
+    <color name="confirmedTextColor">#EA0909</color>
+    <color name="activeTextColor">#1E88E5</color>
+    <color name="recoveredTextColor">#2AD532</color>
+    <color name="deceasedTextColor">#9CC6DDD8</color>
 </resources>
