@@ -1,0 +1,25 @@
+Log.i("Successful", "Yay")
+                Log.i("TEST2", it.getJSONObject("AN").toString())
+                for (item in stateNamesToCode) {
+                    val jsonObject = it.getJSONObject(item.value)
+                    val totalJson = jsonObject.getJSONObject("total")
+                    val deltaJson = jsonObject.getJSONObject("delta")
+                    val confirmed = totalJson.getString("confirmed")
+                    Log.i("TEST3", confirmed)
+                    val deceased = totalJson.getString("deceased")
+                    Log.i("TEST4", deceased)
+                    val recovered = totalJson.getString("recovered")
+                    val active = confirmed.toInt() - recovered.toInt() - deceased.toInt()
+
+                    val confirmedDelta = deltaJson.getString("confirmed")
+                    val deceasedDelta = deltaJson.getString("deceased")
+                    val recoveredDelta = deltaJson.getString("recovered")
+                    val activeDelta =
+                        confirmedDelta.toInt() - recoveredDelta.toInt() - deceasedDelta.toInt()
+
+                    val state = StateData(
+                        item.key, confirmed, active.toString(), recovered, deceased,
+                        confirmedDelta, activeDelta.toString(), recoveredDelta, deceasedDelta
+                    )
+
+                    stateData.add(state)
