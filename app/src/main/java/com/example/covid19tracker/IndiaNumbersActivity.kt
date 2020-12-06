@@ -28,9 +28,11 @@ class IndiaNumbersActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_india_numbers)
 
-        val covid19ViewModel = ViewModelProvider(this).get(CovidDataViewModel::class.java)
-//        val covid19ViewModel: CovidDataViewModel by viewModels()
-        covid19ViewModel.fetchIndiaData(0, applicationContext)
+        val covid19ViewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.AndroidViewModelFactory.getInstance(application)
+        ).get(CovidDataViewModel::class.java)
+
         covid19ViewModel.covid19LiveData!!.observe(this, { covid19Data->
             covid19Data!!.let {
                 Log.d("IndiaNumberOne", "${covid19Data.size}")

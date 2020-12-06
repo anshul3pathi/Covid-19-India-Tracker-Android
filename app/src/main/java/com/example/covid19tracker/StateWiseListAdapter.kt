@@ -28,7 +28,7 @@ class StateWiseListAdapter(): RecyclerView.Adapter<StateWiseViewHolder>() {
         return items.size
     }
 
-    fun updateCovidData(stateWiseData: ArrayList<StateData>) {
+    fun updateCovidData(stateWiseData: List<StateData>) {
         items.clear()
         items.addAll(stateWiseData)
         notifyDataSetChanged()
