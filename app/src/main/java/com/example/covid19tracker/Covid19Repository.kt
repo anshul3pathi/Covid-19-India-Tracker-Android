@@ -1,7 +1,6 @@
 package com.example.covid19tracker
 
 import android.app.Application
-import android.content.Context
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
@@ -13,8 +12,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import org.json.JSONObject
-import java.text.DecimalFormat
-import java.time.LocalDate
 
 @RequiresApi(Build.VERSION_CODES.O)
 class Covid19Repository(private val covid19dao: Covid19DataBaseDao,
@@ -27,11 +24,25 @@ class Covid19Repository(private val covid19dao: Covid19DataBaseDao,
         get() = _covid19LiveData
 
     init {
+        Log.i("Repository", "Object Created!")
         fetchIndiaData(0)
     }
 
     companion object {
-        val STATE_NAMES_TO_CODES: Map<String, String> = mapOf(
+        // Repository follows singleton pattern
+        @Volatile
+        private var INSTANCE: Covid19Repository? = null
+        fun getCovid19Repository(covid19dao: Covid19DataBaseDao,
+                                    application: Application): Covid19Repository {
+            return INSTANCE?: synchronized(this) {
+                val instance = Covid19Repository(covid19dao, application)
+                INSTANCE = instance
+                instance
+            }
+        }
+
+        private var SUCCESS_DATE: String? = null
+        private val STATE_NAMES_TO_CODES: Map<String, String> = mapOf(
             "Andaman and Nicobar Islands" to "AN", "Andhra Pradesh" to "AP",
             "Arunachal Pradesh" to "AR", "Assam" to "AS", "Bihar" to "BR", "Chandigarh" to "CH",
             "Chattisgarh" to "CT", "Delhi" to "DL", "Dadra and Nagar Haveli" to "DN", "Goa" to "GA",
@@ -45,26 +56,18 @@ class Covid19Repository(private val covid19dao: Covid19DataBaseDao,
         )
     }
 
-    private fun numberFormatter(data: StateData): StateData {
-        val myFormatter = DecimalFormat("##,###")
-        return StateData(
-            data.date,
-            data.stateName,
-            myFormatter.format(data.confirmed.toFloat()).toString(),
-            myFormatter.format(data.active.toFloat()).toString(),
-            myFormatter.format(data.recovered.toFloat()).toString(),
-            myFormatter.format(data.deceased.toFloat()).toString(),
-            myFormatter.format(data.confirmedDelta.toFloat()).toString(),
-            myFormatter.format(data.activeDelta.toFloat()).toString(),
-            myFormatter.format(data.recoveredDelta.toFloat()).toString(),
-            myFormatter.format(data.deceasedDelta.toFloat()).toString(),
-        )
+    private fun checkForUpdatingTable() {
+        if(SUCCESS_DATE != null) {
+            uiScope.launch {
+                val check = covid19dao.checkForUpdatingTable("$SUCCESS_DATE ${"Bihar"}")
+                if(check != null) {
+//                    deleteOldData()
+
+                }
+            }
+        }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun getDate(x: Long): String {
-        return LocalDate.now().minusDays(x).toString()
-    }
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun fetchIndiaData(dayMinus: Long) {
@@ -73,20 +76,17 @@ class Covid19Repository(private val covid19dao: Covid19DataBaseDao,
         Log.i("URL API", url)
         val jsonObjectRequest = JsonObjectRequest(Request.Method.GET, url, null, { response->
             Log.d("Volley Call", "Successful")
-            parseData(response, date)
-//            Log.d("Covid19arraySize", covid19LiveData!!.value?.size.toString())
-//            callback.onSuccess()
+            SUCCESS_DATE = date
+            parseData(response)
+
         }, { error->
-//            when(error.message.toString()) {
-//                 "404 not Found"-> fetchIndiaData(dayMinus + 1)
-//            }
             Log.e("Volley Call", error.message.toString())
             fetchIndiaData(dayMinus + 1)
         })
         MySingleton.getInstance(application.applicationContext).addToRequestQueue(jsonObjectRequest)
     }
 
-    private fun parseData(response: JSONObject, date: String) {
+    private fun parseData(response: JSONObject) {
         for(item in STATE_NAMES_TO_CODES) {
             val stateDataJsonObject = response.getJSONObject(item.value)
             val total = stateDataJsonObject.getJSONObject("total")
@@ -103,7 +103,7 @@ class Covid19Repository(private val covid19dao: Covid19DataBaseDao,
             val deltaActive = (deltaConfirmed.toInt() - deltaRecovered.toInt() - deltaDeceased.toInt()).toString()
 
             var stateData = StateData(
-                date + item.key,
+                "$SUCCESS_DATE ${item.key}",
                 item.key,
                 confirmed,
                 active,
@@ -119,15 +119,7 @@ class Covid19Repository(private val covid19dao: Covid19DataBaseDao,
                 covid19dao.insert(stateData)
             }
         }
-
-    }
-
-    private fun parseDataUtil(variable: JSONObject, key: String): String {
-        return try {
-            variable.getString(key)
-        } catch(e: Exception) {
-            "0"
-        }
+        MySingleton.getInstance(application.applicationContext).cancelRequests(application)
     }
 
 }

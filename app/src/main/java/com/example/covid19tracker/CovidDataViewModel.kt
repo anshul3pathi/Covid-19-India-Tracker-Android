@@ -22,10 +22,11 @@ class CovidDataViewModel(application: Application) : AndroidViewModel(applicatio
     val covid19LiveData: LiveData<List<StateData>>
     private val covid19dao = Covid19DataBase.getDatabase(application).covidDataBaseDao
     @RequiresApi(Build.VERSION_CODES.O)
-    private val repo = Covid19Repository(covid19dao, application)
+    private val repo = Covid19Repository.getCovid19Repository(covid19dao, application)
 
     init {
         covid19LiveData = repo.covid19LiveData
+        Log.i("ViewModel", "Object Created!")
     }
 
 }
