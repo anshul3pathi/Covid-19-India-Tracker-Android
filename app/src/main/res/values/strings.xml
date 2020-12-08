@@ -2,4 +2,11 @@
     <string name="app_name">Covid19Tracker</string>
     <string name="app_name_first_activity">Covid-19 India Tracker</string>
     <string name="as_on_date">as on date - %s</string>
+    <string name="active_text">Active</string>
+    <string name="confirmed_text">Confirmed</string>
+    <string name="india_text">India</string>
+    <string name="deceased_text">Deceased</string>
+    <string name="state_wise_button_text">State Wise</string>
+    <string name="recovered_text">Recovered</string>
+    <string name="welcome_image">Welcome Image</string>
 </resources>
