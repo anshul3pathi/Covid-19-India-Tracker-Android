@@ -24,7 +24,6 @@ class Covid19Repository(private val covid19dao: Covid19DataBaseDao,
         get() = _covid19LiveData
 
     init {
-        Log.i("Repository", "Object Created!")
         fetchIndiaData(0)
     }
 
@@ -56,17 +55,7 @@ class Covid19Repository(private val covid19dao: Covid19DataBaseDao,
         )
     }
 
-    private fun checkForUpdatingTable() {
-        if(SUCCESS_DATE != null) {
-            uiScope.launch {
-                val check = covid19dao.checkForUpdatingTable("$SUCCESS_DATE ${"Bihar"}")
-                if(check != null) {
-//                    deleteOldData()
 
-                }
-            }
-        }
-    }
 
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -77,7 +66,7 @@ class Covid19Repository(private val covid19dao: Covid19DataBaseDao,
         val jsonObjectRequest = JsonObjectRequest(Request.Method.GET, url, null, { response->
             Log.d("Volley Call", "Successful")
             SUCCESS_DATE = date
-            parseData(response)
+            checkForUpdatingDatabase(response)
 
         }, { error->
             Log.e("Volley Call", error.message.toString())
@@ -86,21 +75,50 @@ class Covid19Repository(private val covid19dao: Covid19DataBaseDao,
         MySingleton.getInstance(application.applicationContext).addToRequestQueue(jsonObjectRequest)
     }
 
+    private fun checkForUpdatingDatabase(response: JSONObject) {
+        if(_covid19LiveData.value!!.isNotEmpty()) {
+            val currentIdInDatabase = _covid19LiveData.value!![0].id
+            val currentDateInDatabase = splitDateAndState(currentIdInDatabase)
+            when (checkLatestDate(currentDateInDatabase, SUCCESS_DATE!!)) {
+                true -> {
+                    Log.i("RepositoryCheck", "Updating data in the database!")
+                    deleteExistingDataInDatabase()
+                    parseData(response)
+                }
+                else -> Log.i("RepositoryCheck", "Data in database up to date!")
+            }
+        }
+        else {
+            Log.i("RepositoryCheck", "Live data was null so new data is inserted.")
+            parseData(response)
+        }
+    }
+
+    private fun deleteExistingDataInDatabase() {
+        uiScope.launch {
+            covid19dao.deleteOldTable()
+        }
+        Log.i("RepositoryDelete", "Old data has been deleted!")
+    }
+
     private fun parseData(response: JSONObject) {
         for(item in STATE_NAMES_TO_CODES) {
             val stateDataJsonObject = response.getJSONObject(item.value)
-            val total = stateDataJsonObject.getJSONObject("total")
-            val delta = stateDataJsonObject.getJSONObject("delta")
+//            val total = stateDataJsonObject.getJSONObject("total")
+//            val delta = stateDataJsonObject.getJSONObject("delta")
+            val total = parseJsonDataUtil(stateDataJsonObject, "total")
+            val delta = parseJsonDataUtil(stateDataJsonObject, "delta")
 
-            val confirmed = parseDataUtil(total, "confirmed")
-            val recovered = parseDataUtil(total, "recovered")
-            val deceased = parseDataUtil(total, "deceased")
+            val confirmed = parseStringDataUtil(total, "confirmed")
+            val recovered = parseStringDataUtil(total, "recovered")
+            val deceased = parseStringDataUtil(total, "deceased")
             val active = (confirmed.toInt() - recovered.toInt() - deceased.toInt()).toString()
 
-            val deltaConfirmed = parseDataUtil(delta, "confirmed")
-            val deltaRecovered = parseDataUtil(delta, "recovered")
-            val deltaDeceased = parseDataUtil(delta, "deceased")
-            val deltaActive = (deltaConfirmed.toInt() - deltaRecovered.toInt() - deltaDeceased.toInt()).toString()
+            val deltaConfirmed = parseStringDataUtil(delta, "confirmed")
+            val deltaRecovered = parseStringDataUtil(delta, "recovered")
+            val deltaDeceased = parseStringDataUtil(delta, "deceased")
+            val deltaActive = (deltaConfirmed.toInt() - deltaRecovered.toInt()
+                                                            - deltaDeceased.toInt()).toString()
 
             var stateData = StateData(
                 "$SUCCESS_DATE ${item.key}",
@@ -112,7 +130,7 @@ class Covid19Repository(private val covid19dao: Covid19DataBaseDao,
                 deltaConfirmed,
                 deltaActive,
                 deltaRecovered,
-                deltaDeceased
+                deltaDeceased,
             )
             stateData = numberFormatter(stateData)
             uiScope.launch {
