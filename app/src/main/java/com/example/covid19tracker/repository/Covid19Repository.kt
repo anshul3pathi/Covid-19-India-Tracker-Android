@@ -1,4 +1,4 @@
-package com.example.covid19tracker
+package com.example.covid19tracker.repository
 
 import android.app.Application
 import android.os.Build
@@ -7,6 +7,9 @@ import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
+import com.example.covid19tracker.*
+import com.example.covid19tracker.database.Covid19DataBaseDao
+import com.example.covid19tracker.database.StateData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -32,8 +35,8 @@ class Covid19Repository(private val covid19dao: Covid19DataBaseDao,
         @Volatile
         private var INSTANCE: Covid19Repository? = null
         fun getCovid19Repository(covid19dao: Covid19DataBaseDao,
-                                    application: Application): Covid19Repository {
-            return INSTANCE?: synchronized(this) {
+                                 application: Application): Covid19Repository {
+            return INSTANCE ?: synchronized(this) {
                 val instance = Covid19Repository(covid19dao, application)
                 INSTANCE = instance
                 instance

@@ -1,4 +1,4 @@
-package com.example.covid19tracker
+package com.example.covid19tracker.database
 
 import android.content.Context
 import androidx.room.Database

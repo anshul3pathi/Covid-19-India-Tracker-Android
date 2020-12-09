@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Covid19Tracker</string>
+    <string name="app_name">Covid-19 Tracker</string>
     <string name="app_name_first_activity">Covid-19 India Tracker</string>
     <string name="as_on_date">as on date - %s</string>
     <string name="active_text">Active</string>

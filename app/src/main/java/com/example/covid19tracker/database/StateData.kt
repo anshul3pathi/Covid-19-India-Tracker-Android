@@ -1,4 +1,4 @@
-package com.example.covid19tracker
+package com.example.covid19tracker.database
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

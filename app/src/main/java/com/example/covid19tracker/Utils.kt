@@ -3,6 +3,7 @@ package com.example.covid19tracker
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
+import com.example.covid19tracker.database.StateData
 import org.json.JSONObject
 import java.text.DecimalFormat
 import java.time.LocalDate

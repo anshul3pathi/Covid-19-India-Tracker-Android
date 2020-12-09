@@ -1,10 +1,12 @@
-package com.example.covid19tracker
+package com.example.covid19tracker.adapters
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.covid19tracker.R
+import com.example.covid19tracker.database.StateData
 
 class StateWiseListAdapter(): RecyclerView.Adapter<StateWiseViewHolder>() {
 
@@ -17,11 +19,11 @@ class StateWiseListAdapter(): RecyclerView.Adapter<StateWiseViewHolder>() {
 
     override fun onBindViewHolder(holder: StateWiseViewHolder, position: Int) {
         val currentItem = items[position]
-        holder.stateNameText.text = currentItem.stateName.toString()
-        holder.confirmedNumberRV.text = currentItem.confirmed.toString()
-        holder.activeNumberRV.text = currentItem.active.toString()
-        holder.recoveredNumberRV.text = currentItem.recovered.toString()
-        holder.deceasedNumberRV.text = currentItem.deceased.toString()
+        holder.stateNameText.text = currentItem.stateName
+        holder.confirmedNumberRV.text = currentItem.confirmed
+        holder.activeNumberRV.text = currentItem.active
+        holder.recoveredNumberRV.text = currentItem.recovered
+        holder.deceasedNumberRV.text = currentItem.deceased
     }
 
     override fun getItemCount(): Int {

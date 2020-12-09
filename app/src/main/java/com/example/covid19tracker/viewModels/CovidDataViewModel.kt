@@ -1,19 +1,14 @@
-package com.example.covid19tracker
+package com.example.covid19tracker.viewModels
 
 import android.app.Application
-import android.content.Context
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.android.volley.Request
-import com.android.volley.toolbox.JsonObjectRequest
-import org.json.JSONObject
-import java.text.DecimalFormat
-import java.time.LocalDate
+import com.example.covid19tracker.database.Covid19DataBase
+import com.example.covid19tracker.database.StateData
+import com.example.covid19tracker.repository.Covid19Repository
 
 
 @RequiresApi(Build.VERSION_CODES.O)

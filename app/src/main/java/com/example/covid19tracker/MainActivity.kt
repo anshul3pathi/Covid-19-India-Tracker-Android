@@ -11,11 +11,5 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        val intent = Intent(this, IndiaNumbersActivity::class.java)
-        Log.i("Activity1", "Successful")
-        Handler(Looper.getMainLooper()).postDelayed({
-            startActivity(intent)
-        }, 3000)
     }
 }
