@@ -13,27 +13,28 @@ import kotlinx.android.synthetic.main.fragment_view_pager.view.*
 
 class ViewPagerFragment : Fragment() {
 
+    private val mFragmentsList = arrayListOf(IndiaNumbersFragment(), StateWiseNumbersFragment())
+
+    var mViewPagerAdapter: ViewPagerAdapter? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val rootView =  inflater.inflate(R.layout.fragment_view_pager, container, false)
 
-        val fragmentsList = arrayListOf(IndiaNumbersFragment(), StateWiseNumbersFragment())
 
-        val viewPagerAdapter = ViewPagerAdapter(
-            fragmentsList,
-            requireActivity().supportFragmentManager,
+        mViewPagerAdapter = ViewPagerAdapter(
+            mFragmentsList,
+            this.childFragmentManager,
             lifecycle
         )
 
         val tabTitles = listOf("India", "State")
 
-        rootView.view_pager.adapter = viewPagerAdapter
+        rootView.view_pager.adapter = mViewPagerAdapter
 
         TabLayoutMediator(rootView.tab_layout, rootView.view_pager) { tab, position ->
-            Log.d("ViewPager", "$position")
             tab.text = tabTitles[position]
             rootView.view_pager.setCurrentItem(tab.position, true)
         }.attach()

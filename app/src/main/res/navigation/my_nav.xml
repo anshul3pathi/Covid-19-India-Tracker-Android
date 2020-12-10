@@ -19,5 +19,9 @@
         android:id="@+id/viewPagerFragment2"
         android:name="com.example.covid19tracker.fragments.ViewPagerFragment"
         android:label="fragment_view_pager"
-        tools:layout="@layout/fragment_view_pager" />
+        tools:layout="@layout/fragment_view_pager" >
+        <action
+            android:id="@+id/action_viewPagerFragment2_to_splashScreenFragment2"
+            app:popUpTo="@id/splashScreenFragment2" />
+    </fragment>
 </navigation>

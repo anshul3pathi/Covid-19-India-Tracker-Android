@@ -22,16 +22,13 @@ class StateWiseNumbersFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val rootView =  inflater.inflate(R.layout.activity_state_wise, container, false)
-        Log.i("Third Activity", "Loaded Successfully")
         rootView.recyclerView.layoutManager = LinearLayoutManager(requireActivity().applicationContext)
         mAdapter = StateWiseListAdapter()
         rootView.recyclerView.adapter = mAdapter
 
         val covid19ViewModel = ViewModelProvider(this).get(CovidDataViewModel::class.java)
         covid19ViewModel.covid19LiveData.observe(viewLifecycleOwner, { list->
-            Log.d("StateWiseActivityOne", list.size.toString())
             list?.let {
-                Log.d("StateWiseActivity", it.size.toString())
                 mAdapter.updateCovidData(it)
             }
         })

@@ -28,9 +28,6 @@ class IndiaNumbersFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
-        Log.d("IndiaNumbersFragment", "Fragment Created!")
-        // Inflate the layout for this fragment
         mRootView =  inflater.inflate(R.layout.activity_india_numbers, container, false)
 
         mConfirmedDelta = mRootView.findViewById(R.id.confirmed_delta_text)
@@ -45,10 +42,8 @@ class IndiaNumbersFragment : Fragment() {
 
         covid19ViewModel.covid19LiveData!!.observe(viewLifecycleOwner, { covid19Data ->
             covid19Data!!.let {
-                Log.d("IndiaNumberOne", "${covid19Data.size}")
                 for (item in it) {
                     if (item.stateName == "India") {
-                        Log.i("IndiaNumbersTest", item.stateName)
                         updateData(item)
                         break
                     }

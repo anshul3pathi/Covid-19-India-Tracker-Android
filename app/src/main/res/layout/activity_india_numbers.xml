@@ -1,311 +1,334 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/activityBackground"
-    tools:context=".IndiaNumbersActivity">
+    tools:context=".fragments.IndiaNumbersFragment">
 
-    <TextView
-        android:id="@+id/indiaTextView"
-        android:layout_width="171dp"
-        android:layout_height="71dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginBottom="2dp"
-        android:paddingStart="8dp"
-        android:text="@string/india_text"
-        android:textColor="#E65100"
-        android:textSize="64sp"
+    <ScrollView
+        android:id="@+id/india_numbers_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.151"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.098"
-        tools:ignore="RtlSymmetry" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/confirmedCL"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:background="@drawable/confirmed_linear_layout_shape"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.11"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.316">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/inner_CL"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            app:layout_constraintEnd_toEndOf="@+id/indiaTextView"
+            app:layout_constraintStart_toEndOf="@+id/indiaTextView">
 
-        <TextView
-            android:id="@+id/confirmedText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:padding="4dp"
-            android:text="@string/confirmed_text"
-            android:textSize="32sp"
-            app:layout_constraintLeft_toLeftOf="@+id/confirmedCL"
-            app:layout_constraintRight_toRightOf="@+id/confirmedCL"
-            app:layout_constraintTop_toTopOf="@+id/confirmedCL" />
+            <TextView
+                android:id="@+id/indiaTextView"
+                android:layout_width="171dp"
+                android:layout_height="71dp"
+                android:layout_marginEnd="2dp"
+                android:layout_marginBottom="2dp"
+                android:paddingStart="8dp"
+                android:text="@string/india_text"
+                android:textColor="#E65100"
+                android:textSize="64sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.151"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.098"
+                tools:ignore="RtlSymmetry" />
 
-        <TextView
-            android:id="@+id/confirmedNumber"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:paddingStart="50dp"
-            android:textColor="#100"
-            android:textSize="24sp"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintLeft_toLeftOf="@+id/confirmedCL"
-            app:layout_constraintRight_toRightOf="@+id/confirmedCL"
-            app:layout_constraintTop_toTopOf="@+id/confirmedText"
-            tools:ignore="RtlSymmetry" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/confirmedCL"
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:background="@drawable/confirmed_linear_layout_shape"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.11"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.316">
 
-        <TextView
-            android:id="@+id/confirmedNumberIncrease"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:paddingStart="72dp"
-            android:paddingTop="6dp"
-            android:textColor="#100"
-            android:textSize="20sp"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintLeft_toLeftOf="@+id/confirmedCL"
-            app:layout_constraintRight_toRightOf="@+id/confirmedCL"
-            app:layout_constraintTop_toTopOf="@+id/confirmedNumber"
-            tools:ignore="RtlSymmetry" />
+                <TextView
+                    android:id="@+id/confirmedText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:padding="4dp"
+                    android:text="@string/confirmed_text"
+                    android:textSize="32sp"
+                    app:layout_constraintLeft_toLeftOf="@+id/confirmedCL"
+                    app:layout_constraintRight_toRightOf="@+id/confirmedCL"
+                    app:layout_constraintTop_toTopOf="@+id/confirmedCL" />
 
-        <TextView
-            android:id="@+id/confirmed_delta_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="48dp"
-            android:layout_marginTop="44dp"
-            android:textColor="#100"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            app:layout_constraintLeft_toLeftOf="@id/confirmedCL"
-            app:layout_constraintTop_toTopOf="@id/confirmedNumber"
-            tools:text="+" />
+                <TextView
+                    android:id="@+id/confirmedNumber"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="60dp"
+                    android:paddingStart="50dp"
+                    android:textColor="#100"
+                    android:textSize="24sp"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintLeft_toLeftOf="@+id/confirmedCL"
+                    app:layout_constraintRight_toRightOf="@+id/confirmedCL"
+                    app:layout_constraintTop_toTopOf="@+id/confirmedText"
+                    tools:ignore="RtlSymmetry" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/confirmedNumberIncrease"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:paddingStart="72dp"
+                    android:paddingTop="6dp"
+                    android:textColor="#100"
+                    android:textSize="20sp"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintLeft_toLeftOf="@+id/confirmedCL"
+                    app:layout_constraintRight_toRightOf="@+id/confirmedCL"
+                    app:layout_constraintTop_toTopOf="@+id/confirmedNumber"
+                    tools:ignore="RtlSymmetry" />
+
+                <TextView
+                    android:id="@+id/confirmed_delta_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="48dp"
+                    android:layout_marginTop="44dp"
+                    android:textColor="#100"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="@id/confirmedCL"
+                    app:layout_constraintTop_toTopOf="@id/confirmedNumber"
+                    tools:text="+" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/activeCL"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:background="@drawable/active_linear_layout_shape"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.926"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.316">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/activeCL"
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:background="@drawable/active_linear_layout_shape"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.926"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.316">
 
-        <TextView
-            android:id="@+id/activeText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:padding="4dp"
-            android:text="@string/active_text"
-            android:textAlignment="center"
-            android:textSize="32sp"
-            app:layout_constraintLeft_toLeftOf="@+id/activeCL"
-            app:layout_constraintRight_toRightOf="@+id/activeCL"
-            app:layout_constraintTop_toTopOf="@+id/activeCL" />
+                <TextView
+                    android:id="@+id/activeText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:padding="4dp"
+                    android:text="@string/active_text"
+                    android:textAlignment="center"
+                    android:textSize="32sp"
+                    app:layout_constraintLeft_toLeftOf="@+id/activeCL"
+                    app:layout_constraintRight_toRightOf="@+id/activeCL"
+                    app:layout_constraintTop_toTopOf="@+id/activeCL" />
 
-        <TextView
-            android:id="@+id/activeNumber"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:paddingStart="50dp"
-            android:textColor="#100"
-            android:textSize="24sp"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintLeft_toLeftOf="@+id/activeCL"
-            app:layout_constraintRight_toRightOf="@+id/activeCL"
-            app:layout_constraintTop_toTopOf="@+id/activeText"
-            tools:ignore="RtlSymmetry" />
+                <TextView
+                    android:id="@+id/activeNumber"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="60dp"
+                    android:paddingStart="50dp"
+                    android:textColor="#100"
+                    android:textSize="24sp"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintLeft_toLeftOf="@+id/activeCL"
+                    app:layout_constraintRight_toRightOf="@+id/activeCL"
+                    app:layout_constraintTop_toTopOf="@+id/activeText"
+                    tools:ignore="RtlSymmetry" />
 
-        <TextView
-            android:id="@+id/activeNumberIncrease"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:paddingStart="72dp"
-            android:paddingTop="6dp"
-            android:textColor="#100"
-            android:textSize="20sp"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintLeft_toLeftOf="@+id/activeCL"
-            app:layout_constraintRight_toRightOf="@+id/activeCL"
-            app:layout_constraintTop_toTopOf="@+id/activeNumber"
-            tools:ignore="RtlSymmetry" />
+                <TextView
+                    android:id="@+id/activeNumberIncrease"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:paddingStart="72dp"
+                    android:paddingTop="6dp"
+                    android:textColor="#100"
+                    android:textSize="20sp"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintLeft_toLeftOf="@+id/activeCL"
+                    app:layout_constraintRight_toRightOf="@+id/activeCL"
+                    app:layout_constraintTop_toTopOf="@+id/activeNumber"
+                    tools:ignore="RtlSymmetry" />
 
-        <TextView
-            android:id="@+id/active_delta_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="48dp"
-            android:layout_marginTop="44dp"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            app:layout_constraintLeft_toLeftOf="@id/activeCL"
-            app:layout_constraintTop_toTopOf="@id/activeNumber"
-            tools:text="-" />
+                <TextView
+                    android:id="@+id/active_delta_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="48dp"
+                    android:layout_marginTop="44dp"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="@id/activeCL"
+                    app:layout_constraintTop_toTopOf="@id/activeNumber"
+                    tools:text="-" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/recoveredCL"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:background="@drawable/recovered_linear_layout_shape"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.11"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.695">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/recoveredCL"
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:background="@drawable/recovered_linear_layout_shape"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.11"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.69">
 
-        <TextView
-            android:id="@+id/recoveredText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:padding="4dp"
-            android:text="@string/recovered_text"
-            android:textAlignment="center"
-            android:textSize="30sp"
-            app:layout_constraintLeft_toLeftOf="@+id/recoveredCL"
-            app:layout_constraintRight_toRightOf="@+id/recoveredCL"
-            app:layout_constraintTop_toTopOf="@+id/recoveredCL" />
+                <TextView
+                    android:id="@+id/recoveredText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:padding="4dp"
+                    android:text="@string/recovered_text"
+                    android:textAlignment="center"
+                    android:textSize="30sp"
+                    app:layout_constraintLeft_toLeftOf="@+id/recoveredCL"
+                    app:layout_constraintRight_toRightOf="@+id/recoveredCL"
+                    app:layout_constraintTop_toTopOf="@+id/recoveredCL" />
 
-        <TextView
-            android:id="@+id/recoveredNumber"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:paddingStart="50dp"
-            android:textColor="#100"
-            android:textSize="24sp"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintLeft_toLeftOf="@+id/recoveredCL"
-            app:layout_constraintRight_toRightOf="@+id/recoveredCL"
-            app:layout_constraintTop_toTopOf="@+id/recoveredText"
-            tools:ignore="RtlSymmetry" />
+                <TextView
+                    android:id="@+id/recoveredNumber"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="60dp"
+                    android:paddingStart="50dp"
+                    android:textColor="#100"
+                    android:textSize="24sp"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintLeft_toLeftOf="@+id/recoveredCL"
+                    app:layout_constraintRight_toRightOf="@+id/recoveredCL"
+                    app:layout_constraintTop_toTopOf="@+id/recoveredText"
+                    tools:ignore="RtlSymmetry" />
 
-        <TextView
-            android:id="@+id/recoveredNumberIncrease"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:paddingStart="72dp"
-            android:paddingTop="6dp"
-            android:textColor="#100"
-            android:textSize="20sp"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintLeft_toLeftOf="@+id/recoveredCL"
-            app:layout_constraintRight_toRightOf="@+id/recoveredCL"
-            app:layout_constraintTop_toTopOf="@+id/recoveredNumber"
-            tools:ignore="RtlSymmetry" />
+                <TextView
+                    android:id="@+id/recoveredNumberIncrease"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:paddingStart="72dp"
+                    android:paddingTop="6dp"
+                    android:textColor="#100"
+                    android:textSize="20sp"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintLeft_toLeftOf="@+id/recoveredCL"
+                    app:layout_constraintRight_toRightOf="@+id/recoveredCL"
+                    app:layout_constraintTop_toTopOf="@+id/recoveredNumber"
+                    tools:ignore="RtlSymmetry" />
 
-        <TextView
-            android:id="@+id/recovered_delta_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="48dp"
-            android:layout_marginTop="44dp"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            app:layout_constraintLeft_toLeftOf="@id/recoveredCL"
-            app:layout_constraintTop_toTopOf="@id/recoveredNumber"
-            tools:text="+" />
+                <TextView
+                    android:id="@+id/recovered_delta_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="48dp"
+                    android:layout_marginTop="44dp"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="@id/recoveredCL"
+                    app:layout_constraintTop_toTopOf="@id/recoveredNumber"
+                    tools:text="+" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/deceasedCL"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:background="@drawable/deceased_linear_layout_shape"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.926"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.695">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/deceasedCL"
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:background="@drawable/deceased_linear_layout_shape"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.926"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.695">
 
-        <TextView
-            android:id="@+id/deceasedText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:padding="4dp"
-            android:text="@string/deceased_text"
-            android:textAlignment="center"
-            android:textSize="32sp"
-            app:layout_constraintLeft_toLeftOf="@+id/deceasedCL"
-            app:layout_constraintRight_toRightOf="@+id/deceasedCL"
-            app:layout_constraintTop_toTopOf="@+id/deceasedCL" />
+                <TextView
+                    android:id="@+id/deceasedText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:padding="4dp"
+                    android:text="@string/deceased_text"
+                    android:textAlignment="center"
+                    android:textSize="32sp"
+                    app:layout_constraintLeft_toLeftOf="@+id/deceasedCL"
+                    app:layout_constraintRight_toRightOf="@+id/deceasedCL"
+                    app:layout_constraintTop_toTopOf="@+id/deceasedCL" />
 
-        <TextView
-            android:id="@+id/deceasedNumber"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:paddingStart="50dp"
-            android:textColor="#100"
-            android:textSize="24sp"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintLeft_toLeftOf="@+id/deceasedCL"
-            app:layout_constraintRight_toRightOf="@+id/deceasedCL"
-            app:layout_constraintTop_toTopOf="@+id/deceasedText"
-            tools:ignore="RtlSymmetry" />
+                <TextView
+                    android:id="@+id/deceasedNumber"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="60dp"
+                    android:paddingStart="50dp"
+                    android:textColor="#100"
+                    android:textSize="24sp"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintLeft_toLeftOf="@+id/deceasedCL"
+                    app:layout_constraintRight_toRightOf="@+id/deceasedCL"
+                    app:layout_constraintTop_toTopOf="@+id/deceasedText"
+                    tools:ignore="RtlSymmetry" />
 
-        <TextView
-            android:id="@+id/deceasedNumberIncrease"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:paddingStart="72dp"
-            android:paddingTop="6dp"
-            android:textColor="#100"
-            android:textSize="20sp"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintLeft_toLeftOf="@+id/deceasedCL"
-            app:layout_constraintRight_toRightOf="@+id/deceasedCL"
-            app:layout_constraintTop_toTopOf="@+id/deceasedNumber"
-            tools:ignore="RtlSymmetry" />
+                <TextView
+                    android:id="@+id/deceasedNumberIncrease"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:paddingStart="72dp"
+                    android:paddingTop="6dp"
+                    android:textColor="#100"
+                    android:textSize="20sp"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintLeft_toLeftOf="@+id/deceasedCL"
+                    app:layout_constraintRight_toRightOf="@+id/deceasedCL"
+                    app:layout_constraintTop_toTopOf="@+id/deceasedNumber"
+                    tools:ignore="RtlSymmetry" />
 
-        <TextView
-            android:id="@+id/deceased_delta_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="48dp"
-            android:layout_marginTop="44dp"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            app:layout_constraintLeft_toLeftOf="@id/deceasedCL"
-            app:layout_constraintTop_toTopOf="@id/deceasedNumber"
-            tools:text="+" />
+                <TextView
+                    android:id="@+id/deceased_delta_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="48dp"
+                    android:layout_marginTop="44dp"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="@id/deceasedCL"
+                    app:layout_constraintTop_toTopOf="@id/deceasedNumber"
+                    tools:text="+" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
-        android:id="@+id/dateTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/as_on_date"
-        android:textAlignment="center"
-        android:textColor="@color/textOnDarkBackground"
-        android:textSize="16sp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/deceasedCL" />
+            <TextView
+                android:id="@+id/dateTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/as_on_date"
+                android:textAlignment="center"
+                android:textColor="@color/textOnDarkBackground"
+                android:textSize="16sp"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/deceasedCL" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
