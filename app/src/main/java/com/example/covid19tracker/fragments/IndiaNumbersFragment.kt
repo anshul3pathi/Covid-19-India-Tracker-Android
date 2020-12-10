@@ -1,7 +1,6 @@
 package com.example.covid19tracker.fragments
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -28,7 +27,7 @@ class IndiaNumbersFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        mRootView =  inflater.inflate(R.layout.activity_india_numbers, container, false)
+        mRootView =  inflater.inflate(R.layout.fragment_numbers_india, container, false)
 
         mConfirmedDelta = mRootView.findViewById(R.id.confirmed_delta_text)
         mActiveDelta = mRootView.findViewById(R.id.active_delta_text)

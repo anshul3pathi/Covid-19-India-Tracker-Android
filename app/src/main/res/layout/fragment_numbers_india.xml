@@ -15,9 +15,10 @@
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/inner_CL"
@@ -26,22 +27,23 @@
             app:layout_constraintEnd_toEndOf="@+id/indiaTextView"
             app:layout_constraintStart_toEndOf="@+id/indiaTextView">
 
+
             <TextView
                 android:id="@+id/indiaTextView"
                 android:layout_width="171dp"
                 android:layout_height="71dp"
+                android:layout_marginTop="48dp"
                 android:layout_marginEnd="2dp"
-                android:layout_marginBottom="2dp"
                 android:paddingStart="8dp"
                 android:text="@string/india_text"
                 android:textColor="#E65100"
                 android:textSize="64sp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/dateTextView"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.151"
+                app:layout_constraintHorizontal_bias="0.105"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.098"
+                app:layout_constraintVertical_bias="0.02"
                 tools:ignore="RtlSymmetry" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -49,12 +51,11 @@
                 android:layout_width="160dp"
                 android:layout_height="160dp"
                 android:background="@drawable/confirmed_linear_layout_shape"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.11"
+                app:layout_constraintBottom_toTopOf="@+id/recoveredCL"
+                app:layout_constraintEnd_toStartOf="@+id/activeCL"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.316">
+                app:layout_constraintTop_toBottomOf="@+id/indiaTextView">
 
                 <TextView
                     android:id="@+id/confirmedText"
@@ -111,18 +112,15 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/activeCL"
                 android:layout_width="160dp"
                 android:layout_height="160dp"
                 android:background="@drawable/active_linear_layout_shape"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.926"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.316">
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/confirmedCL"
+                app:layout_constraintTop_toTopOf="@+id/confirmedCL">
 
                 <TextView
                     android:id="@+id/activeText"
@@ -184,12 +182,11 @@
                 android:layout_width="160dp"
                 android:layout_height="160dp"
                 android:background="@drawable/recovered_linear_layout_shape"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.11"
+                app:layout_constraintBottom_toTopOf="@+id/dateTextView"
+                app:layout_constraintEnd_toStartOf="@+id/deceasedCL"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.69">
+                app:layout_constraintTop_toBottomOf="@+id/confirmedCL">
 
                 <TextView
                     android:id="@+id/recoveredText"
@@ -251,12 +248,11 @@
                 android:layout_width="160dp"
                 android:layout_height="160dp"
                 android:background="@drawable/deceased_linear_layout_shape"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/dateTextView"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.926"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.695">
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/recoveredCL"
+                app:layout_constraintTop_toBottomOf="@+id/activeCL">
 
                 <TextView
                     android:id="@+id/deceasedText"
