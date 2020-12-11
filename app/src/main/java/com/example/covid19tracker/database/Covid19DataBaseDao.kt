@@ -10,6 +10,9 @@ interface Covid19DataBaseDao {
     @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun insert(state: StateData)
 
+    @Insert(onConflict = OnConflictStrategy.ABORT)
+    suspend fun insertAll(data: ArrayList<StateData>)
+
     @Query("DELETE FROM covid19_data_table")
     suspend fun deleteOldTable()
 
