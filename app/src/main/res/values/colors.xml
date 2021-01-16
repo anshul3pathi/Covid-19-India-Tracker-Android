@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
-    <color name="activityBackground">#0B0233</color>
-    <color name="textOnDarkBackground">#F5F6F6</color>
+    <!--  App Colors  -->
+    <color name="colorPrimary">#E1BEE7</color>
+    <color name="colorPrimaryDark">#BA68C8</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
     <color name="confirmedTextColor">#EA0909</color>
     <color name="activeTextColor">#1E88E5</color>
     <color name="recoveredTextColor">#2AD532</color>
     <color name="deceasedTextColor">#9CC6DDD8</color>
+
+    <!--  India Numbers Colors  -->
+    <color name="confirmed_card_color">#A04646</color>
+    <color name="active_card_color">#3A83AB</color>
+    <color name="recovered_card_color">#64922F</color>
+    <color name="deceased_card_color">#535353</color>
+    <color name="tab_text_color">#8BE0E0E0</color>
+    <color name="selected_tab_text_color">@color/black</color>
 </resources>

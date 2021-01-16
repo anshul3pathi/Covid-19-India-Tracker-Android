@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/eczar</item>
+        <item>@font/eczar_bold</item>
+        <item>@font/eczar_semibold</item>
+        <item>@font/work_sans</item>
+        <item>@font/work_sans_bold</item>
+        <item>@font/work_sans_thin</item>
+    </array>
+</resources>

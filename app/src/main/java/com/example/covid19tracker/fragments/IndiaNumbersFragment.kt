@@ -12,8 +12,6 @@ import com.example.covid19tracker.database.StateData
 import com.example.covid19tracker.splitDateAndState
 import com.example.covid19tracker.viewModels.CovidDataViewModel
 
-private val TAB_NAMES = listOf("India", "States")
-
 class IndiaNumbersFragment : Fragment() {
 
     lateinit var mConfirmedDelta: TextView

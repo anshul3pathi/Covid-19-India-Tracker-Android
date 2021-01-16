@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!--  App theme  -->
+    <style name="Theme.CovidTracker" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="colorControlNormal">@color/black</item>
+        <item name="tabTextColor">@color/tab_text_color</item>
+        <item name="tabSelectedTextColor">@color/selected_tab_text_color</item>
+        <item name="tabIndicatorColor">@color/black</item>
+    </style>
+
+    <!--  Text Themes  -->
+    <style name="TextAppearance.CovidTracker.Headline2" parent="TextAppearance.MaterialComponents.Headline2">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">60sp</item>
+        <item name="fontFamily">@font/eczar_bold</item>
+        <item name="font">@font/eczar_bold</item>
+    </style>
+
+    <style name="TextAppearance.CovidTracker.Headline5" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">24sp</item>
+        <item name="fontFamily">@font/eczar_semibold</item>
+        <item name="font">@font/eczar_semibold</item>
+    </style>
+
+    <style name="TextAppearance.CovidTracker.Headline6" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">20sp</item>
+        <item name="font">@font/eczar</item>
+        <item name="fontFamily">@font/eczar</item>
+    </style>
+
+    <style name="TextAppearance.CovidTracker.Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">16sp</item>
+        <item name="font">@font/eczar</item>
+        <item name="fontFamily">@font/eczar</item>
+    </style>
+
+</resources>

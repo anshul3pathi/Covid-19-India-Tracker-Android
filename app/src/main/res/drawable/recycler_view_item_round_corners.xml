@@ -1,13 +1,13 @@
 <shape
     xmlns:android="http://schemas.android.com/apk/res/android">
     <solid
-        android:color="@color/cardview_dark_background">
+        android:color="@color/white">
     </solid>
     <stroke
         android:width="0dp"
         android:color="#C62828">
     </stroke>
     <corners
-        android:radius="16dp">
+        android:radius="8dp">
     </corners>
 </shape>
